@@ -1,6 +1,17 @@
-const API_BASE = process.env.REACT_APP_API_URL || (process.env.NODE_ENV === 'development' ? 'http://localhost:5000/api' : '/api');
+const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
 const getToken = () => localStorage.getItem('taskmanager_token');
+
+const clearAuth = () => {
+  localStorage.removeItem('taskmanager_token');
+  localStorage.removeItem('taskmanager_user');
+};
+
+let logoutHandler = null;
+
+export const setLogoutHandler = (handler) => {
+  logoutHandler = handler;
+};
 
 const request = async (path, options = {}) => {
   const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
@@ -8,8 +19,16 @@ const request = async (path, options = {}) => {
   if (token) headers.Authorization = `Bearer ${token}`;
 
   const response = await fetch(`${API_BASE}${path}`, { ...options, headers });
+  
+  if (response.status === 401) {
+    clearAuth();
+    if (logoutHandler) logoutHandler();
+  }
+
   const json = await response.json();
-  if (!response.ok) throw new Error(json.message || 'Request failed');
+  if (!response.ok) {
+    throw new Error(json.message || 'Request failed');
+  }
   return json;
 };
 

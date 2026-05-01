@@ -9,6 +9,10 @@ const taskRoutes = require('./routes/tasks');
 const app = express();
 connectDB();
 
+if (!process.env.JWT_SECRET) {
+  console.warn('WARNING: JWT_SECRET is not defined in .env. Using default insecure secret.');
+}
+
 app.use(cors());
 app.use(express.json());
 

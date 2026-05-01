@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { fetchProjects, fetchTasks, createTask, updateTask } from '../api';
+import { fetchProjects, fetchTasks, createTask, updateTask, fetchUsers } from '../api';
 
 export default function Tasks({ user }) {
   const [projects, setProjects] = useState([]);
+  const [users, setUsers] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -14,8 +15,14 @@ export default function Tasks({ user }) {
   useEffect(() => {
     const load = async () => {
       try {
-        setProjects(await fetchProjects());
-        setTasks(await fetchTasks());
+        const [projData, taskData, userData] = await Promise.all([
+          fetchProjects(),
+          fetchTasks(),
+          fetchUsers()
+        ]);
+        setProjects(projData);
+        setTasks(taskData);
+        setUsers(userData);
       } catch (err) {
         setError(err.message);
       }
@@ -26,7 +33,13 @@ export default function Tasks({ user }) {
   const handleCreate = async (e) => {
     e.preventDefault();
     try {
-      await createTask({ title, description, project: projectId, assignedTo: assignee, status });
+      await createTask({
+        title,
+        description,
+        project: projectId,
+        assignedTo: assignee || undefined,
+        status,
+      });
       setTitle('');
       setDescription('');
       setAssignee('');
@@ -71,7 +84,12 @@ export default function Tasks({ user }) {
         </label>
         <label>
           Assign to
-          <input value={assignee} onChange={(e) => setAssignee(e.target.value)} placeholder="User ID or leave blank" />
+          <select value={assignee} onChange={(e) => setAssignee(e.target.value)}>
+            <option value="">Unassigned</option>
+            {users.map((u) => (
+              <option key={u._id} value={u._id}>{u.name} ({u.role})</option>
+            ))}
+          </select>
         </label>
         <label>
           Status
