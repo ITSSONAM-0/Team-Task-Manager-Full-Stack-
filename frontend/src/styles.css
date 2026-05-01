@@ -1,0 +1,142 @@
+:root {
+  --bg: #f5f7fb;
+  --panel: #ffffff;
+  --text: #1f2937;
+  --muted: #64748b;
+  --primary: #2563eb;
+  --success: #16a34a;
+  --danger: #dc2626;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+main {
+  padding: 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #1e293b;
+  color: #ffffff;
+}
+
+header.navbar > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+header.navbar a,
+header.navbar button.secondary {
+  color: #cbd5e1;
+  text-decoration: none;
+}
+
+header.navbar a {
+  margin: 0;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.75rem;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+header.navbar a:hover,
+header.navbar a:focus-visible {
+  background: rgba(255,255,255,0.08);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+header.navbar button.secondary {
+  margin: 0;
+  padding: 0.6rem 1rem;
+  background: #475569;
+  border: 1px solid transparent;
+  cursor: pointer;
+  border-radius: 0.75rem;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+header.navbar button.secondary:hover,
+header.navbar button.secondary:focus-visible {
+  background: #334155;
+  transform: translateY(-1px);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+label {
+  display: block;
+}
+
+.card {
+  background: var(--panel);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+  margin-bottom: 1rem;
+}
+
+.form-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: #f8fafc;
+}
+
+button {
+  border: none;
+  border-radius: 0.85rem;
+  padding: 0.9rem 1.25rem;
+  cursor: pointer;
+  color: #ffffff;
+  background: var(--primary);
+}
+
+button.secondary {
+  background: #475569;
+}
+
+.status-pill {
+  display: inline-flex;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+  color: #ffffff;
+}
+
+.status-pill.todo { background: #475569; }
+.status-pill.in-progress { background: #f59e0b; }
+.status-pill.done { background: #16a34a; }
