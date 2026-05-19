@@ -1,8 +1,8 @@
-# Team Task Manager (Monorepo)
+# Team Task Manager 
 
 A professional full-stack task management application built with the MERN stack. This application allows teams to manage projects, track tasks, and collaborate through a central dashboard.
 
-## 🚀 Features
+##  Features
 
 - **Authentication**: Secure JWT-based login and signup.
 - **Roles**: Support for Admin and Member roles.
@@ -13,7 +13,7 @@ A professional full-stack task management application built with the MERN stack.
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Frontend**: React.js
 - **Backend**: Node.js, Express.js
@@ -23,7 +23,7 @@ A professional full-stack task management application built with the MERN stack.
 
 ---
 
-## 📁 Folder Structure
+##  Folder Structure
 
 - `server/`: Express.js backend containing configuration, models, controllers, and API routes.
 - `client/`: React.js frontend containing components, pages, and UI styles.
@@ -31,7 +31,7 @@ A professional full-stack task management application built with the MERN stack.
 
 ---
 
-## 💻 Local Installation and Setup
+##  Local Installation and Setup
 
 Since this is a monorepo setup, you can manage both the client and server directly from the root directory using standard npm commands.
 
@@ -73,7 +73,7 @@ Since this is a monorepo setup, you can manage both the client and server direct
 
 ---
 
-## ☁️ Deployment on Railway
+##  Deployment on Railway
 
 This project is fully optimized for a unified single-service deployment on **Railway** (or other PaaS platforms).
 
