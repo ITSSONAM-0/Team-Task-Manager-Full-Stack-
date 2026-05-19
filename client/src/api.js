@@ -1,4 +1,7 @@
-const API_BASE = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_BASE = (process.env.NODE_ENV === 'production') 
+  ? '/api' 
+  : (process.env.REACT_APP_API_URL || 'http://localhost:5000/api');
+
 
 const getToken = () => localStorage.getItem('taskmanager_token');
 
@@ -23,6 +26,11 @@ const request = async (path, options = {}) => {
   if (response.status === 401) {
     clearAuth();
     if (logoutHandler) logoutHandler();
+  }
+
+  const contentType = response.headers.get('content-type');
+  if (!contentType || !contentType.includes('application/json')) {
+    throw new Error('API URL is incorrect or backend is down. Received HTML instead of JSON.');
   }
 
   const json = await response.json();

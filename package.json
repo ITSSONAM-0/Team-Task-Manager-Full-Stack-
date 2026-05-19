@@ -1,0 +1,12 @@
+{
+  "name": "team-task-manager-monorepo",
+  "version": "1.0.0",
+  "scripts": {
+    "install-backend": "cd server && npm install",
+    "install-frontend": "cd client && npm install",
+    "build-frontend": "cd client && npm run build",
+    "install-all": "npm run install-backend && npm run install-frontend",
+    "build": "npm run install-all && npm run build-frontend",
+    "start": "cd server && node server.js"
+  }
+}
